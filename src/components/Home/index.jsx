@@ -1,20 +1,22 @@
-import React from 'react'
-import Doc from '../../assests/doc.png'
-import { styledHome } from '../../styled-components'
+import React from "react";
+import Doc from "../../assests/doc.png";
+import { StyledHome } from "../../styled-components";
+import Login from "../Login";
 
 class Home extends React.Component {
   render() {
     return (
-      <styledHome>
+      <StyledHome>
         <div className="image">
-          <img src={Doc} alt="home logo" />
+          <img src={Doc} alt="home pic" />
         </div>
-        <div className="user">
-          <h3>Hello</h3>
+        <div className="formComp">
+          <h2 className="title">Disease Prediction</h2>
+          <Login />
         </div>
-      </styledHome>
-    )
+      </StyledHome>
+    );
   }
 }
 
-export default Home
+export default Home;
