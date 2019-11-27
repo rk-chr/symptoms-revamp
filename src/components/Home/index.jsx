@@ -25,13 +25,11 @@ class Home extends React.Component {
         </div>
         <div className="formComp">
           <h2 className="title">Disease Prediction</h2>
-          {comp ? <Register /> : <Login />}
+          {comp ? <Register /> : <Login handleComp={this.handleComp} />}
           <h5 className="changeComp">
-            {comp
-              ? "Already have an account? please"
-              : "Don't have an account? please"}{" "}
+            {comp ? "Already have an account? please" : ""}{" "}
             <Link to="#" onClick={this.handleComp}>
-              {comp ? "Login" : "Create an account"}
+              {comp ? "Login" : ""}
             </Link>
           </h5>
         </div>

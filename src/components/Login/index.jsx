@@ -1,8 +1,9 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { StyledForm, StyledButton, StyledAlert } from "../../styled-components";
 import Input from "../InputBox";
 import { validateEmail, validatePassword } from "../../validations";
+import ChatBox from "../ChatBox";
 
 const initialState = {
   email: "",
@@ -16,6 +17,7 @@ const initialState = {
 class Login extends React.Component {
   state = {
     ...initialState,
+    name: "",
     login: {
       loading: false,
       loaded: false,
@@ -45,7 +47,6 @@ class Login extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { email, password } = this.state;
-    const { history } = this.props;
     if (email && password) {
       this.setState({ login: { loading: true, error: false } });
       if (localStorage.getItem("user")) {
@@ -58,8 +59,10 @@ class Login extends React.Component {
               localStorage.setItem("logout", "false");
             }
             return setTimeout(() => {
-              this.setState({ login: { loading: false, loaded: true } });
-              return history.push("/chat-box");
+              this.setState({
+                name: user[0].name,
+                login: { loading: false, loaded: true }
+              });
             }, 600);
           } else {
             return setTimeout(
@@ -92,8 +95,28 @@ class Login extends React.Component {
       }
     }
   };
+
+  handleState = () => {
+    return new Promise(resolve =>
+      resolve(
+        setTimeout(
+          () =>
+            this.setState({
+              login: {
+                loading: false,
+                loaded: false,
+                error: false
+              }
+            }),
+          1600
+        )
+      )
+    );
+  };
+
   render() {
     const {
+      name,
       email,
       emailError,
       emailErrorMessage,
@@ -102,6 +125,12 @@ class Login extends React.Component {
       passwordErrorMessage,
       login
     } = this.state;
+    const { handleComp } = this.props;
+
+    if (login.loaded) {
+      return <ChatBox name={name} handleState={this.handleState} />;
+    }
+
     return (
       <StyledForm onSubmit={this.handleSubmit}>
         <Input
@@ -132,6 +161,14 @@ class Login extends React.Component {
           <StyledAlert error={!!login.error}>
             {login.error && login.error}
           </StyledAlert>
+        )}
+        {!login.loaded && (
+          <h5 className="changeComp">
+            Don't have an account? please{" "}
+            <Link to="#" onClick={handleComp}>
+              create an account
+            </Link>
+          </h5>
         )}
       </StyledForm>
     );

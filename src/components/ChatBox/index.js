@@ -1,13 +1,26 @@
 import React from "react";
 import ChatBot from "react-simple-chatbot";
+import { withRouter } from "react-router-dom";
 
 class ChatBox extends React.Component {
+  handleRoute = path => {
+    const { history } = this.props;
+    return new Promise(resolve =>
+      resolve(
+        setTimeout(() => {
+          history.push(path);
+        }, 3100)
+      )
+    );
+  };
+
   render() {
+    const { name, handleState } = this.props;
     const pattern = new RegExp(/(i|need|medication|yes)/gi);
     const steps = [
       {
         id: "0",
-        message: "Welcome RAMA",
+        message: `Welcome ${name}`,
         trigger: "1"
       },
       {
@@ -36,8 +49,10 @@ class ChatBox extends React.Component {
         user: true,
         validator: value => {
           if (value === "yes") {
+            this.handleRoute("/dashboard").then(res => res);
             return true;
           } else if (value === "no") {
+            handleState().then(res => res);
             return "Okay. Have a nice day!";
           }
           return "sorry! I didn't get you?";
@@ -51,13 +66,11 @@ class ChatBox extends React.Component {
       }
     ];
     return (
-      <div
-        style={{ margin: "auto", marginTop: "5rem", width: 400, hight: 500 }}
-      >
+      <div style={{ marginLeft: "38px" }}>
         <ChatBot steps={steps} />
       </div>
     );
   }
 }
 
-export default ChatBox;
+export default withRouter(ChatBox);
