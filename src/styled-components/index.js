@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const StyledHome = styled.div`
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   display: flexbox;
   flex-direction: row;
 
@@ -35,6 +35,7 @@ const StyledHome = styled.div`
 
   .formComp {
     width: 43%;
+    padding: 100px;
   }
 
   .formComp .title {
@@ -43,10 +44,13 @@ const StyledHome = styled.div`
     font-weight: 700;
     font-size: 25px;
   }
+
+  .changeComp {
+    text-align: center;
+  }
 `;
 
 const StyledForm = styled.form`
-  padding: 100px;
   margin-top: 20px;
   label,
   input {
@@ -77,15 +81,18 @@ const StyledInput = styled.input`
 const StyledButton = styled.button`
   width: 100%;
   padding: 12px;
-  color: white;
-  background-image: linear-gradient(
+  color: ${props => (props.disabled ? "black" : "white")};
+  background-color: ${props => props.disabled && "#dddddd"};
+  background-image: ${props =>
+    !props.disabled &&
+    `linear-gradient(
     to right top,
     #2a313b,
     #43545a,
     #647878,
     #8e9e95,
     #bec3b4
-  );
+  )`};
   border-radius: 3px;
   font-size: 17px;
   font-weight: 600;
@@ -116,4 +123,32 @@ const StyledAlert = styled.div`
   background-color: ${props => (props.error ? "#f8d7da" : "#d4edda")};
 `;
 
-export { StyledHome, StyledForm, StyledInput, StyledButton, StyledAlert };
+const spin = keyframes`
+ 0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const StyledLoader = styled.div`
+  border: 6px solid lightgray;
+  border-radius: 50%;
+  border-top: 6px solid grey;
+  width: 50px;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: ${spin} 2s linear infinite;
+`;
+
+export {
+  StyledHome,
+  StyledForm,
+  StyledInput,
+  StyledButton,
+  StyledAlert,
+  StyledLoader
+};

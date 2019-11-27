@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { withRouter } from "react-router-dom";
 import { StyledForm, StyledButton, StyledAlert } from "../../styled-components";
 import Input from "../InputBox";
 import { validateEmail, validatePassword } from "../../validations";
@@ -12,24 +13,28 @@ const initialState = {
   passwordErrorMessage: ""
 };
 
-const Login = props => {
-  const [state, setState] = useState(initialState);
-  const [status, setStatus] = useState({});
+class Login extends React.Component {
+  state = {
+    ...initialState,
+    login: {
+      loading: false,
+      loaded: false,
+      error: false
+    }
+  };
 
-  const handleChange = e => {
+  handleChange = e => {
     const { name, value } = e.target;
     if (name === "email") {
       const checkError = validateEmail(value);
-      setState({
-        ...state,
+      this.setState({
         email: value,
         emailError: checkError.error,
         emailErrorMessage: checkError.error ? checkError.errorMessage : ""
       });
     } else if (name === "password") {
       const checkError = validatePassword(value);
-      setState({
-        ...state,
+      this.setState({
         password: value,
         passwordError: checkError.error,
         passwordErrorMessage: checkError.error ? checkError.errorMessage : ""
@@ -37,68 +42,100 @@ const Login = props => {
     }
   };
 
-  const handleSubmit = e => {
+  handleSubmit = e => {
     e.preventDefault();
-    const { email, emailError, password, passwordError } = state;
-    const { handlelogin } = props;
-    if (!(passwordError && emailError)) {
+    const { email, password } = this.state;
+    const { history } = this.props;
+    if (email && password) {
+      this.setState({ login: { loading: true, error: false } });
       if (localStorage.getItem("user")) {
         const user = JSON.parse(localStorage.getItem("user")).filter(
           ele => ele.email === email
         );
-        if (user) {
+        if (user.length > 0) {
           if (user[0].password === password) {
             if (localStorage.getItem("logout")) {
               localStorage.setItem("logout", "false");
             }
-            setStatus({ msg: "Your Redirecting to Dashboard..", error: "" });
-            // history.push('/user/dashboard');
-            handlelogin(true, user[0].name);
+            return setTimeout(() => {
+              this.setState({ login: { loading: false, loaded: true } });
+              return history.push("/chat-box");
+            }, 600);
           } else {
-            setStatus({ msg: "", error: "Password is wrong!" });
+            return setTimeout(
+              () =>
+                this.setState({
+                  login: { loading: false, error: "Password is wrong!" }
+                }),
+              600
+            );
           }
         } else {
           // user not found
-          setStatus({ msg: "", error: "Email not registered!" });
+          return setTimeout(
+            () =>
+              this.setState({
+                login: { loading: false, error: "User not found!" }
+              }),
+            600
+          );
         }
       } else {
         // user not found
-        setStatus({ msg: "", error: "Email not registered!" });
+        setTimeout(
+          () =>
+            this.setState({
+              login: { loading: false, error: "User not found!" }
+            }),
+          600
+        );
       }
     }
   };
+  render() {
+    const {
+      email,
+      emailError,
+      emailErrorMessage,
+      password,
+      passwordError,
+      passwordErrorMessage,
+      login
+    } = this.state;
+    return (
+      <StyledForm onSubmit={this.handleSubmit}>
+        <Input
+          label="Email"
+          name="email"
+          type="text"
+          value={email}
+          placeholder="Enter your email"
+          change={this.handleChange}
+          error={emailError}
+          errorMessage={emailErrorMessage}
+        />
 
-  return (
-    <StyledForm onSubmit={handleSubmit}>
-      <Input
-        label="Email"
-        name="email"
-        type="text"
-        value={state.email}
-        placeholder="Enter your email"
-        change={handleChange}
-        error={state.emailError}
-        errorMessage={state.emailErrorMessage}
-      />
+        <Input
+          label="Password"
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          error={passwordError}
+          change={this.handleChange}
+          errorMessage={passwordErrorMessage}
+        />
+        <StyledButton disabled={login.loading}>
+          {login.loading ? "Loading.." : "Login"}
+        </StyledButton>
+        {login.error && (
+          <StyledAlert error={!!login.error}>
+            {login.error && login.error}
+          </StyledAlert>
+        )}
+      </StyledForm>
+    );
+  }
+}
 
-      <Input
-        label="Password"
-        name="password"
-        type="password"
-        placeholder="Enter your password"
-        value={state.password}
-        error={state.passwordError}
-        change={handleChange}
-        errorMessage={state.passwordErrorMessage}
-      />
-      <StyledButton>Login</StyledButton>
-      {(status.msg || status.error) && (
-        <StyledAlert error={status.error}>
-          {status.error ? status.error : status.msg}
-        </StyledAlert>
-      )}
-    </StyledForm>
-  );
-};
-
-export default Login;
+export default withRouter(Login);
