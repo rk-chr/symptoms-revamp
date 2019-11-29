@@ -144,11 +144,105 @@ const StyledLoader = styled.div`
   animation: ${spin} 2s linear infinite;
 `;
 
+const StyledDashboard = styled.div`
+  background-color: whitesmoke;
+
+  .selected {
+    width: 68%;
+    float: left;
+    padding: 10px;
+  }
+
+  .selected .chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40%;
+    float: left;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    height: 600px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .selected .chat .items {
+    padding: 8px;
+  }
+
+  .selected .chat .items ul {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .selected .chat .items ul li {
+    list-style-type: none;
+  }
+
+  .selected .chat .input {
+    background-color: white;
+    padding: 30px 8px 8px 8px;
+  }
+
+  .selected .chat .input input {
+    padding: 8px;
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    border-bottom: 3px solid gold;
+    outline: none;
+  }
+
+  .selected .chat .input input::placeholder {
+    letter-spacing: 0.4px;
+  }
+
+  .selected .common {
+    width: 60%;
+    float: left;
+  }
+
+  .symptoms {
+    width: 32%;
+    float: left;
+    background-image: linear-gradient(
+      to right top,
+      #82868a,
+      #7e8587,
+      #7c8483,
+      #7b827e,
+      #7d7f79
+    );
+    padding: 10px;
+  }
+`;
+
+const StyledHeader = styled.div`
+  background-color: violet;
+  padding: 20px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  background-color: mediumseagreen;
+
+  .title {
+    font-size: 22px;
+    letter-spacing: 1.8px;
+    color: black;
+    background-color: white;
+    width: 370px;
+    text-align: center;
+    border-radius: 3px;
+  }
+`;
+
 export {
   StyledHome,
   StyledForm,
   StyledInput,
   StyledButton,
   StyledAlert,
-  StyledLoader
+  StyledLoader,
+  StyledDashboard,
+  StyledHeader
 };

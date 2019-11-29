@@ -10,6 +10,11 @@ class Home extends React.Component {
     comp: false
   };
 
+  componentDidMount() {
+    if (localStorage.getItem("logout") === "false")
+      this.props.history.push("/dashboard");
+  }
+
   handleComp = () => {
     this.setState(prevState => ({
       comp: !prevState.comp

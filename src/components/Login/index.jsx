@@ -55,9 +55,7 @@ class Login extends React.Component {
         );
         if (user.length > 0) {
           if (user[0].password === password) {
-            if (localStorage.getItem("logout")) {
-              localStorage.setItem("logout", "false");
-            }
+            localStorage.setItem("logout", "false");
             return setTimeout(() => {
               this.setState({
                 name: user[0].name,
