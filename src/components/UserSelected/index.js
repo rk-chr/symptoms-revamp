@@ -3,10 +3,12 @@ import axios from "axios";
 import { symptoms } from "../../data";
 import { searchResults } from "../../helpers";
 import styles from "./index.module.css";
+import Modal from "../Modal";
 
 class UserSelected extends React.Component {
   state = {
-    query: ""
+    query: "",
+    show: true
   };
 
   handleChange = e => {
@@ -41,7 +43,13 @@ class UserSelected extends React.Component {
   };
 
   render() {
-    const { handleDelete, symptoms: sym, handleSave, loading } = this.props;
+    const {
+      handleDelete,
+      symptoms: sym,
+      handleSave,
+      loading,
+      loaded
+    } = this.props;
     const { query, search_results } = this.state;
     return (
       <div className="chat">
@@ -82,6 +90,12 @@ class UserSelected extends React.Component {
             <div className={`${styles.loading} ${styles["style-2"]}`}>
               <div className={`${styles["loading-wheel"]}`}></div>
             </div>
+          )}
+          {!loaded && (
+            <Modal show={this.state.show} handleClose={this.hideModal}>
+              <p>Modal</p>
+              <p>Data</p>
+            </Modal>
           )}
         </div>
       </div>

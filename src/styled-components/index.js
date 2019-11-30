@@ -482,6 +482,48 @@ const StyledResponses = styled.div`
   }
 `;
 
+const StyledModal = styled.div`
+  display: ${props => (props.show ? "block" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+
+  .modal-main {
+    position: fixed;
+    background: white;
+    width: 45%;
+    height: auto;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    padding: 14px;
+  }
+
+  .close {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    position: relative;
+    float: right;
+    width: 5%;
+    text-align: center;
+    border-radius: 50px;
+    padding: 2px;
+    top: -125px;
+    left: 25px;
+    cursor: pointer;
+  }
+
+  .close:hover {
+    background-color: red;
+    color: white;
+  }
+`;
+
 export {
   StyledHome,
   StyledForm,
@@ -491,5 +533,6 @@ export {
   StyledLoader,
   StyledDashboard,
   StyledHeader,
-  StyledResponses
+  StyledResponses,
+  StyledModal
 };
