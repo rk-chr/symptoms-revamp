@@ -148,9 +148,12 @@ const StyledDashboard = styled.div`
   background-color: whitesmoke;
 
   .selected {
-    width: 68%;
+    /* width: 68%; */
+    transition: width 0.3s ease-in-out;
     float: left;
     padding: 10px;
+    display: flex;
+    flex-direction: row;
   }
 
   .selected .chat {
@@ -158,7 +161,6 @@ const StyledDashboard = styled.div`
     flex-direction: column;
     justify-content: space-between;
     width: 40%;
-    float: left;
     border-radius: 3px;
     background-color: white;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
@@ -169,21 +171,45 @@ const StyledDashboard = styled.div`
   }
 
   .selected .chat .items {
-    padding: 8px;
+    padding: 16px;
+    margin: 0.25rem;
+    background: ghostwhite;
   }
 
-  .selected .chat .items ul {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .selected .chat .items ul li {
-    list-style-type: none;
+  .selected .chat .items p {
+    display: inline-block;
+    margin: 2px 3px;
+    background-image: linear-gradient(
+      to left bottom,
+      #71be33,
+      #5db247,
+      #4ea654,
+      #44995e,
+      #418c63
+    );
+    /* background-image: linear-gradient(to right top, #34a2b2, #57aa9e, #7eaf8d, #a3b186, #c2b28c); */
+    color: white;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
   }
 
   .selected .chat .input {
     background-color: white;
     padding: 30px 8px 8px 8px;
+  }
+
+  .selected .chat .items p:hover {
+    background-image: linear-gradient(
+      to left bottom,
+      #be8f33,
+      #ba842b,
+      #b57823,
+      #b16d1c,
+      #ac6116
+    );
+    cursor: pointer;
   }
 
   .selected .chat .input input {
@@ -201,21 +227,106 @@ const StyledDashboard = styled.div`
 
   .selected .common {
     width: 60%;
-    float: left;
+    margin-left: 12px;
+  }
+
+  .selected .common .title {
+    letter-spacing: 1.4px;
+  }
+
+  .selected .common .Cdisease {
+    margin-top: 20px;
+  }
+
+  .selected .common .Cdisease p {
+    display: inline-block;
+    margin: 4px 8px;
+    color: white;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background-image: linear-gradient(
+      to right top,
+      #34a2b2,
+      #57aa9e,
+      #7eaf8d,
+      #a3b186,
+      #c2b28c
+    );
+  }
+
+  .selected .common .Cdisease p:hover {
+    background-image: linear-gradient(
+      to left bottom,
+      #be3360,
+      #c13b4c,
+      #be4739,
+      #b75427,
+      #ac6116
+    );
+    cursor: pointer;
+  }
+
+  .selected .common .bsymp {
+    background-color: orange;
+    color: ghostwhite;
+    padding: 2px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .selected .common .bsymp:hover {
+    background-color: goldenrod;
   }
 
   .symptoms {
-    width: 32%;
-    float: left;
+    transition: width 0.3s ease-in-out;
+    float: right;
+    box-shadow: -2px 0px 26px 1px rgba(0, 0, 0, 0.16);
+    background-color: whitesmoke;
+    /* padding: 10px; */
+  }
+
+  .symptoms .title {
+    letter-spacing: 1.4px;
+    color: black;
+  }
+
+  .symptoms .chunks {
+    max-height: 700px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .symptoms .chunks p {
+    display: inline-block;
     background-image: linear-gradient(
-      to right top,
-      #82868a,
-      #7e8587,
-      #7c8483,
-      #7b827e,
-      #7d7f79
+      to left bottom,
+      #be3360,
+      #c13b4c,
+      #be4739,
+      #b75427,
+      #ac6116
     );
-    padding: 10px;
+    color: white;
+    margin: 6px 5px;
+    padding: 3px 12px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+  }
+
+  .symptoms .chunks p:hover {
+    background-image: linear-gradient(
+      to left bottom,
+      #d5b9c2,
+      #c5abac,
+      #b29d99,
+      #9f9089,
+      #8b837b
+    );
   }
 `;
 
