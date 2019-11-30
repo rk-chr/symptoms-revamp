@@ -3,10 +3,12 @@ import { StyledDashboard, StyledHeader } from "../../styled-components";
 import CommonSymptoms from "../CommonSymptoms";
 import Symptoms from "../Symptoms";
 import UserSelected from "../UserSelected";
+import Responses from "../Responses";
 
 class Dashboard extends React.Component {
   state = {
-    click: false
+    click: false,
+    recent: false
   };
 
   handleClick = () => {
@@ -16,8 +18,15 @@ class Dashboard extends React.Component {
     });
   };
 
+  handleRecent = () => {
+    const { recent } = this.state;
+    this.setState({
+      recent: !recent
+    });
+  };
+
   render() {
-    const { click } = this.state;
+    const { click, recent } = this.state;
     return (
       <>
         <StyledHeader>
@@ -30,10 +39,14 @@ class Dashboard extends React.Component {
           >
             <UserSelected />
             <div className="common">
-              <CommonSymptoms />
+              <CommonSymptoms
+                handleClick={this.handleClick}
+                handleRecent={this.handleRecent}
+              />
             </div>
           </div>
           <Symptoms click={click} />
+          <Responses recent={recent} handleRecent={this.handleRecent} />
         </StyledDashboard>
       </>
     );

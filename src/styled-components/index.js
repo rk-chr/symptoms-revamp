@@ -347,6 +347,71 @@ const StyledHeader = styled.div`
   }
 `;
 
+const StyledResponses = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: white;
+  box-shadow: -2px 0px 55px 1px rgba(0, 0, 0, 0.16);
+  height: 820px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: 99;
+  transition: width 0.3s ease-in;
+
+  .title {
+    letter-spacing: 1.2px;
+    color: black;
+  }
+
+  .messages {
+    box-shadow: -2px -17px 69px 1px rgba(0, 0, 0, 0.16);
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 12px;
+    margin-bottom: 14px;
+  }
+
+  .messages h3 {
+    letter-spacing: 0.4px;
+    font-weight: 500;
+  }
+
+  .messages h3 span {
+    color: chocolate;
+  }
+
+  .messages .disease {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+
+  .messages .disease h4 {
+    background-image: linear-gradient(
+      to left bottom,
+      #e986a9,
+      #dc8ab2,
+      #ce8eb9,
+      #c092bd,
+      #b395bd
+    );
+    color: white;
+    padding: 3px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 0.7px;
+  }
+
+  .messages .disease h6 {
+    position: relative;
+    top: 10px;
+    letter-spacing: 0.5px;
+    right: 12px;
+  }
+`;
+
 export {
   StyledHome,
   StyledForm,
@@ -355,5 +420,6 @@ export {
   StyledAlert,
   StyledLoader,
   StyledDashboard,
-  StyledHeader
+  StyledHeader,
+  StyledResponses
 };

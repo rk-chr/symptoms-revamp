@@ -1,4 +1,5 @@
 import React from "react";
+import { symptoms } from "../../data";
 
 class Symptoms extends React.Component {
   render() {
@@ -14,15 +15,9 @@ class Symptoms extends React.Component {
         >
           <h3 className="title">Symptoms:</h3>
           <div className="chunks">
-            <p>Symptoms</p>
-            <p>Symptoms</p>
-            <p>Symptoms</p>
-            <p>Symptoms</p>
-            <p>Symptoms</p>
-            <p>Symptoms</p>
-            <p>Symptoms</p>
-            <p>Symptoms</p>
-            <p>Symptoms</p>
+            {symptoms.map((ele, i) => (
+              <p key={i}>{ele}</p>
+            ))}
           </div>
         </div>
       </>
