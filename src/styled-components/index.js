@@ -176,6 +176,41 @@ const StyledDashboard = styled.div`
     background: ghostwhite;
   }
 
+  .selected .chat .items .btn {
+    margin-top: 30px;
+    float: right;
+    padding: 5px 12px;
+    width: 30%;
+    text-align: center;
+    border-radius: 4px;
+    color: white;
+    -webkit-letter-spacing: 1px;
+    -moz-letter-spacing: 1px;
+    -ms-letter-spacing: 1px;
+    letter-spacing: 1px;
+    font-size: 15px;
+    cursor: pointer;
+    background-image: linear-gradient(
+      to left bottom,
+      #e986a9,
+      #dc8ab2,
+      #ce8eb9,
+      #c092bd,
+      #b395bd
+    );
+  }
+
+  .selected .chat .items .btn:hover {
+    background-image: linear-gradient(
+      to right top,
+      #34a2b2,
+      #57aa9e,
+      #7eaf8d,
+      #a3b186,
+      #c2b28c
+    );
+  }
+
   .selected .chat .items p {
     display: inline-block;
     margin: 2px 3px;
@@ -195,9 +230,40 @@ const StyledDashboard = styled.div`
     letter-spacing: 0.5px;
   }
 
+  .selected .chat .items .delete {
+    position: relative;
+    top: -13px;
+    left: 14px;
+    color: red;
+    visibility: hidden;
+  }
+
   .selected .chat .input {
     background-color: white;
     padding: 30px 8px 8px 8px;
+  }
+
+  .selected .chat .input .searchResults {
+    position: absolute;
+    margin-top: 12px;
+    width: 38%;
+    border-radius: 5px;
+    background-color: lightgray;
+    max-height: 120px;
+    overflow: scroll;
+  }
+
+  .selected .chat .input .searchResults h6 {
+    padding: 5px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .selected .chat .input .searchResults h6:hover {
+    background-color: orange;
+    color: white;
   }
 
   .selected .chat .items p:hover {
@@ -210,6 +276,10 @@ const StyledDashboard = styled.div`
       #ac6116
     );
     cursor: pointer;
+  }
+
+  .selected .chat .items p:hover .delete {
+    visibility: visible;
   }
 
   .selected .chat .input input {
@@ -357,7 +427,7 @@ const StyledResponses = styled.div`
   overflow-x: hidden;
   overflow-y: scroll;
   z-index: 99;
-  transition: width 0.3s ease-in;
+  transition: width 0.3s ease-out;
 
   .title {
     letter-spacing: 1.2px;

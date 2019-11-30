@@ -8,7 +8,8 @@ import Responses from "../Responses";
 class Dashboard extends React.Component {
   state = {
     click: false,
-    recent: false
+    recent: false,
+    selectedSymptoms: []
   };
 
   handleClick = () => {
@@ -25,8 +26,25 @@ class Dashboard extends React.Component {
     });
   };
 
+  handleSave = sym => () => {
+    const { selectedSymptoms } = this.state;
+    const checkSymptoms = selectedSymptoms.filter(ele => ele === sym);
+    this.setState({
+      selectedSymptoms:
+        checkSymptoms.length > 0 ? selectedSymptoms : [...selectedSymptoms, sym]
+    });
+  };
+
+  handleDelete = sym => () => {
+    const { selectedSymptoms } = this.state;
+    const newSelectedSymptoms = selectedSymptoms.filter(ele => ele !== sym);
+    this.setState({
+      selectedSymptoms: newSelectedSymptoms
+    });
+  };
+
   render() {
-    const { click, recent } = this.state;
+    const { click, recent, selectedSymptoms } = this.state;
     return (
       <>
         <StyledHeader>
@@ -37,15 +55,20 @@ class Dashboard extends React.Component {
             className="selected"
             style={{ width: `${click ? "68%" : "100%"}` }}
           >
-            <UserSelected />
+            <UserSelected
+              handleDelete={this.handleDelete}
+              symptoms={selectedSymptoms}
+              handleSave={this.handleSave}
+            />
             <div className="common">
               <CommonSymptoms
                 handleClick={this.handleClick}
                 handleRecent={this.handleRecent}
+                handleSave={this.handleSave}
               />
             </div>
           </div>
-          <Symptoms click={click} />
+          <Symptoms click={click} handleSave={this.handleSave} />
           <Responses recent={recent} handleRecent={this.handleRecent} />
         </StyledDashboard>
       </>

@@ -3,7 +3,7 @@ import { commonSymptoms } from "../../data";
 
 class CommonSymptoms extends React.Component {
   render() {
-    const { handleClick, handleRecent } = this.props;
+    const { handleClick, handleRecent, handleSave } = this.props;
     return (
       <>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -38,7 +38,9 @@ class CommonSymptoms extends React.Component {
         </div>
         <div className="Cdisease">
           {commonSymptoms.map((ele, i) => (
-            <p key={i}>{ele}</p>
+            <p key={i} onClick={handleSave(ele)}>
+              {ele}
+            </p>
           ))}
         </div>
       </>

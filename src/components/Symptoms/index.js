@@ -3,7 +3,7 @@ import { symptoms } from "../../data";
 
 class Symptoms extends React.Component {
   render() {
-    const { click } = this.props;
+    const { click, handleSave } = this.props;
     return (
       <>
         <div
@@ -16,7 +16,9 @@ class Symptoms extends React.Component {
           <h3 className="title">Symptoms:</h3>
           <div className="chunks">
             {symptoms.map((ele, i) => (
-              <p key={i}>{ele}</p>
+              <p key={i} onClick={handleSave(ele)}>
+                {ele}
+              </p>
             ))}
           </div>
         </div>
