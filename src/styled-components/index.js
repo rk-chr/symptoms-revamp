@@ -176,7 +176,7 @@ const StyledDashboard = styled.div`
     background: ghostwhite;
   }
 
-  .selected .chat .items .btn {
+  .selected .btn {
     margin-top: 30px;
     float: right;
     padding: 5px 12px;
@@ -200,7 +200,7 @@ const StyledDashboard = styled.div`
     );
   }
 
-  .selected .chat .items .btn:hover {
+  .selected .btn:hover {
     background-image: linear-gradient(
       to right top,
       #34a2b2,
@@ -228,6 +228,52 @@ const StyledDashboard = styled.div`
     border-radius: 4px;
     font-weight: 600;
     letter-spacing: 0.5px;
+  }
+
+  .selected .modalSpan {
+    color: rebeccapurple;
+    letter-spacing: 0.4px;
+  }
+
+  .selected .smileys:hover {
+    transform: translateY(2px);
+    cursor: pointer;
+  }
+
+  .selected .smileys:hover h4 {
+    background-image: linear-gradient(
+      to right top,
+      #34a2b2,
+      #57aa9e,
+      #7eaf8d,
+      #a3b186,
+      #c2b28c
+    );
+  }
+
+  .selected .smileys h4 {
+    background-image: linear-gradient(
+      to left bottom,
+      #e986a9,
+      #dc8ab2,
+      #ce8eb9,
+      #c092bd,
+      #b395bd
+    );
+    padding: 1.5px 12px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .selected .smileys .activeEmoji {
+    background-image: linear-gradient(
+      to right top,
+      #34a2b2,
+      #57aa9e,
+      #7eaf8d,
+      #a3b186,
+      #c2b28c
+    );
   }
 
   .selected .chat .items .delete {
@@ -496,7 +542,7 @@ const StyledModal = styled.div`
     background: white;
     width: 45%;
     height: auto;
-    top: 25%;
+    top: 34%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 20px;
@@ -507,15 +553,14 @@ const StyledModal = styled.div`
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
       0 3px 1px -2px rgba(0, 0, 0, 0.2);
     background-color: white;
-    position: relative;
-    float: right;
     width: 5%;
     text-align: center;
     border-radius: 50px;
     padding: 2px;
-    top: -125px;
-    left: 25px;
     cursor: pointer;
+    position: absolute;
+    top: -10px;
+    right: -5px;
   }
 
   .close:hover {

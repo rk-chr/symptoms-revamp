@@ -10,7 +10,8 @@ class Symptoms extends React.Component {
           className="symptoms"
           style={{
             width: `${click ? "32%" : "0"}`,
-            padding: `${click ? "10px" : "0"}`
+            padding: `${click ? "10px" : "0"}`,
+            display: `${click ? "block" : "none"}`
           }}
         >
           <h3 className="title">Symptoms:</h3>

@@ -2,8 +2,22 @@ import React from "react";
 import { StyledResponses } from "../../styled-components";
 
 class Responses extends React.Component {
+  state = {
+    feedBackData: []
+  };
+
+  componentDidMount() {
+    if (localStorage.getItem("feedback")) {
+      const feedBackData = JSON.parse(localStorage.getItem("feedback"));
+      this.setState({
+        feedBackData
+      });
+    }
+  }
+
   render() {
     const { recent, handleRecent } = this.props;
+    const { feedBackData } = this.state;
     return (
       <StyledResponses
         style={{
@@ -20,15 +34,18 @@ class Responses extends React.Component {
             &#10005;
           </h6>
         </div>
-        <div className="messages">
-          <h3>
-            <span>Disease:</span> Something
-          </h3>
-          <div className="disease">
-            <h4>Details</h4>
-            <h6>Date: 12-06-2019</h6>
-          </div>
-        </div>
+        {feedBackData &&
+          feedBackData.map((ele, i) => (
+            <div className="messages" key={String(i)}>
+              <h3>
+                <span>Disease:</span> {ele.data.disease}
+              </h3>
+              <div className="disease">
+                <h4>Details</h4>
+                <h6>Date: 12-06-2019</h6>
+              </div>
+            </div>
+          ))}
       </StyledResponses>
     );
   }
