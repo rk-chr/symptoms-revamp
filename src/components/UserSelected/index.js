@@ -5,6 +5,7 @@ import { searchResults } from "../../helpers";
 import styles from "./index.module.css";
 import FeedBackModal from "../FeedBackModal";
 import Modal from "../Modal";
+import { API_END_POINT } from "../../ApiPoint";
 
 class UserSelected extends React.Component {
   state = {
@@ -38,10 +39,9 @@ class UserSelected extends React.Component {
     if (symptoms.length > 0) {
       this.setState({ loading: true, error: false });
       try {
-        const res = await axios.post(
-          "http://localhost:2018/symptoms-identify",
-          { symptoms: JSON.stringify(symptoms) }
-        );
+        const res = await axios.post(API_END_POINT, {
+          symptoms: JSON.stringify(symptoms)
+        });
         if (res)
           return this.setState({
             loading: false,
