@@ -1,9 +1,12 @@
 import React from "react";
 import { StyledResponses } from "../../styled-components";
+import Modal from "../Modal";
 
 class Responses extends React.Component {
   state = {
-    feedBackData: []
+    feedBackData: [],
+    modalDet: false,
+    modalData: {}
   };
 
   componentDidMount() {
@@ -15,9 +18,17 @@ class Responses extends React.Component {
     }
   }
 
+  onDetails = data => () => {
+    this.setState(prevState => ({
+      modalDet: !prevState.modalDet,
+      modalData: data
+    }));
+  };
+
   render() {
     const { recent, handleRecent } = this.props;
-    const { feedBackData } = this.state;
+    const { feedBackData, modalDet, modalData } = this.state;
+
     return (
       <StyledResponses
         style={{
@@ -41,11 +52,27 @@ class Responses extends React.Component {
                 <span>Disease:</span> {ele.data.disease}
               </h3>
               <div className="disease">
-                <h4>Details</h4>
+                <h4 onClick={this.onDetails(ele)}>Details</h4>
                 <h6>Date: 12-06-2019</h6>
               </div>
             </div>
           ))}
+        {modalDet && (
+          <Modal show={modalDet} handleClose={this.onDetails({})}>
+            <p>
+              <span className="modalSpan">Disease: </span>{" "}
+              <strong style={{ letterSpacing: "0.6px" }}>
+                {modalData.data.disease}
+              </strong>
+            </p>
+            <p>
+              <span className="modalSpan">Remedy: </span>
+              <strong style={{ letterSpacing: "0.6px" }}>
+                {modalData.data.remedy}
+              </strong>
+            </p>
+          </Modal>
+        )}
       </StyledResponses>
     );
   }

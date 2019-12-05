@@ -22,6 +22,16 @@ class UserSelected extends React.Component {
     });
   };
 
+  ClearState = () => {
+    this.setState({
+      loading: false,
+      loaded: false,
+      error: false,
+      data: {}
+    });
+    this.props.handleSymClear();
+  };
+
   handleSubmit = async e => {
     e.preventDefault();
     const { symptoms } = this.props;
@@ -45,15 +55,8 @@ class UserSelected extends React.Component {
   };
 
   render() {
-    const {
-      handleDelete,
-      symptoms: sym,
-      handleSave,
-      loading,
-      loaded,
-      error
-    } = this.props;
-    const { query, search_results, data } = this.state;
+    const { handleDelete, symptoms: sym, handleSave } = this.props;
+    const { query, search_results, data, loading, loaded, error } = this.state;
     return (
       <div className="chat">
         <div className="items">
@@ -94,7 +97,7 @@ class UserSelected extends React.Component {
               <div className={`${styles["loading-wheel"]}`}></div>
             </div>
           )}
-          {loaded && <FeedBackModal data={data} />}
+          {loaded && <FeedBackModal data={data} ClearState={this.ClearState} />}
           {error && <Modal>{error}</Modal>}
         </div>
       </div>

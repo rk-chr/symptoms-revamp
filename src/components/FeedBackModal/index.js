@@ -13,25 +13,39 @@ class FeedbackModal extends React.Component {
     emoji: "",
     show: true
   };
+
   handleEmoji = name => () => {
-    this.setState({
+    return this.setState({
       emoji: name
     });
   };
 
-  handleFeedback = () => {
-    const { data } = this.props;
+  hideModal = () => {
+    const { ClearState } = this.props;
+    this.setState(prevState => ({
+      show: !prevState.show
+    }));
+    ClearState();
+  };
+
+  handleFeedback = e => {
+    e.preventDefault();
+    const { data, ClearState } = this.props;
     const { emoji } = this.state;
     const newData = { emoji, data };
     if (localStorage.getItem("feedback")) {
       const feedbackData = JSON.parse(localStorage.getItem("feedback"));
       localStorage.setItem(
         "feedback",
-        JSON.stringify([...feedbackData, ...newData])
+        JSON.stringify([...feedbackData, { ...newData }])
       );
     } else {
-      localStorage.setItem("feedback", JSON.stringify([...newData]));
+      localStorage.setItem("feedback", JSON.stringify([{ ...newData }]));
     }
+    this.setState(prevState => ({
+      show: !prevState.show
+    }));
+    ClearState();
   };
 
   render() {
@@ -51,7 +65,6 @@ class FeedbackModal extends React.Component {
         <div
           className="feedback"
           style={{ display: "flex", justifyContent: "center" }}
-          onClick={this.handleFeedback}
         >
           {smileys.map(ele => (
             <div

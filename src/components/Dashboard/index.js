@@ -19,6 +19,12 @@ class Dashboard extends React.Component {
     });
   };
 
+  handleSymClear = () => {
+    this.setState({
+      selectedSymptoms: []
+    });
+  };
+
   handleRecent = () => {
     const { recent } = this.state;
     this.setState({
@@ -59,6 +65,7 @@ class Dashboard extends React.Component {
               handleDelete={this.handleDelete}
               symptoms={selectedSymptoms}
               handleSave={this.handleSave}
+              handleSymClear={this.handleSymClear}
             />
             <div className="common">
               <CommonSymptoms

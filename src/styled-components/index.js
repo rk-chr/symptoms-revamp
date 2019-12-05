@@ -542,7 +542,7 @@ const StyledModal = styled.div`
     background: white;
     width: 45%;
     height: auto;
-    top: 34%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 20px;
