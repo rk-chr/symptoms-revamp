@@ -53,7 +53,7 @@ class Responses extends React.Component {
               </h3>
               <div className="disease">
                 <h4 onClick={this.onDetails(ele)}>Details</h4>
-                <h6>Date: 12-06-2019</h6>
+                <h6>Date: {ele.date}</h6>
               </div>
             </div>
           ))}

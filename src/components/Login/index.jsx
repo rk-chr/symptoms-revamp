@@ -46,8 +46,8 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { email, password } = this.state;
-    if (email && password) {
+    const { email, password, emailError, passwordError } = this.state;
+    if (email && password && !emailError && !passwordError) {
       this.setState({ login: { loading: true, error: false } });
       if (localStorage.getItem("user")) {
         const user = JSON.parse(localStorage.getItem("user")).filter(

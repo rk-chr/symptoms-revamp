@@ -32,7 +32,12 @@ class FeedbackModal extends React.Component {
     e.preventDefault();
     const { data, ClearState } = this.props;
     const { emoji } = this.state;
-    const newData = { emoji, data };
+    const d = new Date();
+    const newData = {
+      emoji,
+      data,
+      date: d.getDay() + "-" + d.getMonth() + "-" + d.getFullYear()
+    };
     if (localStorage.getItem("feedback")) {
       const feedbackData = JSON.parse(localStorage.getItem("feedback"));
       localStorage.setItem(
@@ -46,6 +51,7 @@ class FeedbackModal extends React.Component {
       show: !prevState.show
     }));
     ClearState();
+    window.location.reload(false);
   };
 
   render() {
@@ -87,7 +93,7 @@ class FeedbackModal extends React.Component {
           ))}
         </div>
         <h5
-          className="btn"
+          className="btn-modal"
           style={{ width: "20%" }}
           onClick={this.handleFeedback}
         >

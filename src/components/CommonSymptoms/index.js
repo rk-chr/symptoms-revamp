@@ -1,9 +1,24 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { commonSymptoms } from "../../data";
 
 class CommonSymptoms extends React.Component {
+  state = {
+    loading: false
+  };
+
+  onLogout = () => {
+    this.setState({ loading: true });
+    const { history } = this.props;
+    localStorage.setItem("logout", "true");
+    setTimeout(() => {
+      this.setState({ loading: false });
+      history.push("/");
+    }, 600);
+  };
+
   render() {
-    const { handleClick, handleRecent, handleSave } = this.props;
+    const { handleClick, handleRecent, handleSave, loading } = this.props;
     return (
       <>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -32,7 +47,7 @@ class CommonSymptoms extends React.Component {
                 fontWeight: "500"
               }}
             >
-              Logout
+              {loading ? "loading.." : "Logout"}
             </h3>
           </div>
         </div>
@@ -48,4 +63,4 @@ class CommonSymptoms extends React.Component {
   }
 }
 
-export default CommonSymptoms;
+export default withRouter(CommonSymptoms);

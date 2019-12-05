@@ -62,8 +62,22 @@ class Register extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { name, email, password } = this.state;
-    if (name && email && password) {
+    const {
+      name,
+      email,
+      password,
+      nameError,
+      emailError,
+      passwordError
+    } = this.state;
+    if (
+      name &&
+      email &&
+      password &&
+      !nameError &&
+      !emailError &&
+      !passwordError
+    ) {
       this.setState({ register: { loading: true, error: false } });
       if (localStorage.getItem("user")) {
         const user = JSON.parse(localStorage.getItem("user"));

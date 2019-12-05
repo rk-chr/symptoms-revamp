@@ -200,6 +200,30 @@ const StyledDashboard = styled.div`
     );
   }
 
+  .selected .btn-modal {
+    margin-top: 30px;
+    margin-left: auto;
+    padding: 5px 12px;
+    width: 20%;
+    text-align: center;
+    border-radius: 4px;
+    color: white;
+    -webkit-letter-spacing: 1px;
+    -moz-letter-spacing: 1px;
+    -ms-letter-spacing: 1px;
+    letter-spacing: 1px;
+    font-size: 15px;
+    cursor: pointer;
+    background-image: linear-gradient(
+      to left bottom,
+      #e986a9,
+      #dc8ab2,
+      #ce8eb9,
+      #c092bd,
+      #b395bd
+    );
+  }
+
   .selected .btn:hover {
     background-image: linear-gradient(
       to right top,
@@ -529,22 +553,26 @@ const StyledResponses = styled.div`
 `;
 
 const StyledModal = styled.div`
-  display: ${props => (props.show ? "block" : "none")};
-  position: fixed;
-  top: 0;
+  display: ${props => (props.show ? "block" : "block")};
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
 
   .modal-main {
-    position: fixed;
-    background: white;
-    width: 45%;
-    height: auto;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 66%;
+    /* transform: translate(-50%, -50%); */
     border-radius: 20px;
     padding: 14px;
   }
