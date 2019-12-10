@@ -163,7 +163,7 @@ class Register extends React.Component {
         />
         <span
           onClick={this.handleShowpassword}
-          style={{ position: "absolute", right: "7.5%", top: "49.5%" }}
+          style={{ position: "relative", left: "394px", top: "-30px" }}
         >
           <i class="fa fa-eye" aria-hidden="true"></i>
         </span>

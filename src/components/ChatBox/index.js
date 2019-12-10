@@ -17,6 +17,7 @@ class ChatBox extends React.Component {
   render() {
     const { name, handleState } = this.props;
     const pattern = new RegExp(/(i|need|medication|yes)/gi);
+    const yesValidate = new RegExp(/(yes|yup)/gi);
     const steps = [
       {
         id: "0",
@@ -48,12 +49,7 @@ class ChatBox extends React.Component {
         id: "4",
         user: true,
         validator: value => {
-          if (
-            value === "yes" ||
-            value === "YES" ||
-            value === "yup" ||
-            value === "YUP"
-          ) {
+          if (yesValidate.test(value)) {
             this.handleRoute("/dashboard").then(res => res);
             return true;
           } else if (value === "no") {
