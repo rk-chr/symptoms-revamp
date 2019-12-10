@@ -67,15 +67,17 @@ class FeedbackModal extends React.Component {
       <Modal show={this.state.show} handleClose={this.hideModal}>
         {thank && (
           <div
-            style={{ marginLeft: "auto", marginRight: "auto", padding: "50px" }}
+            style={{
+              padding: "60px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
           >
             <span
               style={{
-                padding: "60px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center"
+                fontSize: "80px"
               }}
             >
               <i class="fa fa-thumbs-up" aria-hidden="true"></i>
