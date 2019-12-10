@@ -18,6 +18,18 @@ class Responses extends React.Component {
     }
   }
 
+  handleDelete = data => () => {
+    if (localStorage.getItem("feedback")) {
+      const feedBackData = JSON.parse(localStorage.getItem("feedback"));
+      const newFeedback = feedBackData.filter(
+        ele => JSON.stringify(ele) !== JSON.stringify(data)
+      );
+      this.setState({
+        feedBackData: newFeedback
+      });
+    }
+  };
+
   onDetails = data => () => {
     this.setState(prevState => ({
       modalDet: !prevState.modalDet,
@@ -51,6 +63,19 @@ class Responses extends React.Component {
               <h3>
                 <span>Disease:</span> {ele.data.disease}
               </h3>
+              <span
+                style={{
+                  position: "relative",
+                  left: "319px",
+                  top: "-10px",
+                  backgroundColor: "red",
+                  padding: "0px 8px",
+                  borderRadius: "5px"
+                }}
+                onClick={this.handleDelete(ele)}
+              >
+                Delete
+              </span>
               <div className="disease">
                 <h4 onClick={this.onDetails(ele)}>Details</h4>
                 <h6>Date: {ele.date}</h6>

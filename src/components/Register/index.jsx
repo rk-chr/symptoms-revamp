@@ -27,11 +27,18 @@ const initialState = {
 class Register extends React.Component {
   state = {
     ...initialState,
+    showPassword: false,
     register: {
       loading: false,
       loaded: false,
       error: false
     }
+  };
+
+  handleShowpassword = () => {
+    this.setState(prevState => ({
+      showPassword: !prevState.showPassword
+    }));
   };
 
   handleChange = e => {
@@ -119,7 +126,8 @@ class Register extends React.Component {
       emailErrorMessage,
       passwordError,
       passwordErrorMessage,
-      register
+      register,
+      showPassword
     } = this.state;
     return (
       <StyledForm onSubmit={this.handleSubmit}>
@@ -146,13 +154,19 @@ class Register extends React.Component {
         <Input
           label="Password"
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Enter your password"
           value={password}
           error={passwordError}
           change={this.handleChange}
           errorMessage={passwordErrorMessage}
         />
+        <span
+          onClick={this.handleShowpassword}
+          style={{ position: "absolute", right: "7.5%", top: "49.5%" }}
+        >
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </span>
         {register.loading && (
           <StyledLoader
             style={{ marginTop: "25px", width: "35px", height: "35px" }}

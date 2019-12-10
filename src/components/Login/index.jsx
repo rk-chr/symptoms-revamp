@@ -18,11 +18,18 @@ class Login extends React.Component {
   state = {
     ...initialState,
     name: "",
+    showPassword: false,
     login: {
       loading: false,
       loaded: false,
       error: false
     }
+  };
+
+  handleShowpassword = () => {
+    this.setState(prevState => ({
+      showPassword: !prevState.showPassword
+    }));
   };
 
   handleChange = e => {
@@ -121,7 +128,8 @@ class Login extends React.Component {
       password,
       passwordError,
       passwordErrorMessage,
-      login
+      login,
+      showPassword
     } = this.state;
     const { handleComp } = this.props;
 
@@ -145,13 +153,19 @@ class Login extends React.Component {
         <Input
           label="Password"
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Enter your password"
           value={password}
           error={passwordError}
           change={this.handleChange}
           errorMessage={passwordErrorMessage}
         />
+        <span
+          onClick={this.handleShowpassword}
+          style={{ position: "absolute", right: "7.5%", top: "37.2%" }}
+        >
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </span>
         <StyledButton disabled={login.loading}>
           {login.loading ? "Loading.." : "Login"}
         </StyledButton>

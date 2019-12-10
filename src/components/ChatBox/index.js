@@ -48,7 +48,12 @@ class ChatBox extends React.Component {
         id: "4",
         user: true,
         validator: value => {
-          if (value === "yes") {
+          if (
+            value === "yes" ||
+            value === "YES" ||
+            value === "yup" ||
+            value === "YUP"
+          ) {
             this.handleRoute("/dashboard").then(res => res);
             return true;
           } else if (value === "no") {
